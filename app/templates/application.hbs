@@ -1,4 +1,7 @@
-{{page-title "Dearth Funk"}}
-<LoadAnimation/>
-
+{{page-title "Dearth Funk`"}}
+<LoadAnimation @running={{this.running}}/>
 {{outlet}}
+
+{{#unless this.running}}
+  <Menu></Menu>
+{{/unless}}

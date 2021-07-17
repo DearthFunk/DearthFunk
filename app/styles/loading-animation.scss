@@ -1,31 +1,42 @@
 $LEN: 2s;
 $text-mangler-len: $LEN * 6;
 $circle-grow-len: $LEN;
+$size-fade: $LEN * 2;
 $circle-size: 10px;
 $blue: #000080;
 
 .load-animation.running {
   cursor: pointer;
   animation: pulsate $LEN infinite;
+  transform: scale(1.5);
+  &:hover {
+    transform: scale(1.6);
+  }
   .dearthfunk {
     &:after {
       animation: textMangler $text-mangler-len infinite;
+      filter: blur(1px);
     }
   }
 }
 .load-animation {
   color: white;
+  animation: hueRotator $LEN infinite;
+  transition: transform 0.3s ease-out;
   .dearthfunk {
     text-shadow: 2px 2px 2px $blue;
-    font-size: 3em;
+    font-size: 2em;
     &:after {
       content: 'dearthfunk';
       display: block;
-      filter: blur(3px);
+      filter: blur(2px);
     }
   }
 }
-
+@keyframes hueRotator {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
 @keyframes textMangler {
   0% {content: 'dearthfunk'}
   2% {content: 'de@rthf_nk'}

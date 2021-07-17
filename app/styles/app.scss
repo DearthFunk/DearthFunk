@@ -1,4 +1,5 @@
 @import 'loading-animation.scss';
+@import 'menu.scss';
 
 $window-padding: 10vh;
 
@@ -6,6 +7,10 @@ $window-padding: 10vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }
 
 body {
@@ -17,13 +22,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(-45deg, #000000, #000015, #151515, #000000);
+  background: linear-gradient(-45deg, #000015, #050515, #150505, #000015);
   background-size: 200% 200%;
   animation: backgroundMover 60s ease infinite;
+  text-decoration: none;
 }
 
 @keyframes backgroundMover {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
