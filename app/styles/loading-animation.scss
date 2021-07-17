@@ -1,0 +1,75 @@
+$LEN: 2s;
+$text-mangler-len: $LEN * 6;
+$circle-grow-len: $LEN * 24;
+
+$blue: #000080;
+
+.load-animation {
+  color: white;
+  font-size: 3em;
+  animation: pulsate $LEN infinite;
+  text-shadow: 1px 1px 1px $blue;
+
+  .cicle {
+    color: $blue;
+    border: 3px solid;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    animation: circleGrowth $circle-grow-len ease-out infinite;
+    opacity: 0;
+    z-index: 1;
+    display: flex;
+    filter: blur(4px);
+    position: absolute;
+  }
+
+  .dearthfunk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:after {
+      content: 'dearthfunk';
+      display: block;
+      animation: textMangler $text-mangler-len infinite;
+      filter: blur(3px);
+    }
+  }
+}
+
+@keyframes textMangler {
+  0% {content: 'dearthfunk'}
+  2% {content: 'de@rthf_nk'}
+  4% {content: 'de_rth3_nk'}
+  6% {content: 'd3_rth__nk'}
+  10% { content: '_3_rth__nk'}
+  11% { content: '_3__th__nk'}
+  12% { content: '___th@nks_'}
+  25% { content: '_d_a_th_ks'}
+  30% { content: 'death_____'}
+  40% { content: 'dearth____'}
+  41% { content: 'dearthf___'}
+  42% { content: 'dearthfu__'}
+  43% { content: 'dearthfun_'}
+  44% { content: 'dearthfunk'}
+}
+
+@keyframes pulsate {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+@keyframes circleGrowth {
+  0% {
+    transform: scale(0.1, 0.1);
+    opacity: 0.0;
+  }
+  50% {
+    opacity: 1.0; 
+    transform: scale(2, 2);
+  }
+  100% {
+    transform: scale(3, 3);
+    opacity: 0.0;
+  }
+}
