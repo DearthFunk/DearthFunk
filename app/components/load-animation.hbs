@@ -1,4 +1,5 @@
-<div class="load-animation">
-  <div class="cicle"></div>  
-  <div class="dearthfunk"></div>
+<div class="load-animation {{if this.animationRunning 'running'}}">
+  <div class="dearthfunk" role="button"
+    {{on "click" (fn (mut this.animationRunning) false)}}>
+  </div>
 </div>

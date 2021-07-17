@@ -17,4 +17,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(-45deg, #000000, #000015, #151515, #000000);
+  background-size: 200% 200%;
+  animation: backgroundMover 60s ease infinite;
+}
+
+@keyframes backgroundMover {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
