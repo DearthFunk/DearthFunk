@@ -1,11 +1,8 @@
 <div class="menu">
-  <dl>
-    {{#each this.menuItems as |menuItem|}}
-      <dt>{{menuItem.label}}</dt>
-      {{#each menuItem.items as |subItem|}}
-        <dd>{{subItem.label}}</dd>
-      {{/each}}
-    {{/each}}
-  </dl>
+
+  <LinkTo @route="code">code</LinkTo>
+  <LinkTo @route="audio">audio</LinkTo>
+  <LinkTo @route="info">info</LinkTo>
+
 </div>
 
