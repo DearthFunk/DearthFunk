@@ -6,14 +6,12 @@ $circle-size: 10px;
 $blue: #000080;
 
 .load-animation.running {
-  cursor: pointer;
   animation: pulsate $LEN infinite;
-  transform: scale(1.5);
-  &:hover {
-    transform: scale(1.6);
-  }
+  transform: translate(0,0);
   .dearthfunk {
+    cursor: pointer;
     &:after {
+      font-size: 2em;
       animation: textMangler $text-mangler-len infinite;
       filter: blur(1px);
     }
@@ -22,14 +20,20 @@ $blue: #000080;
 .load-animation {
   color: white;
   animation: hueRotator $LEN infinite;
-  transition: transform 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transition: transform 1s ease-in-out;
+  transform: translate(0,35vh);
   .dearthfunk {
     text-shadow: 2px 2px 2px $blue;
-    font-size: 2em;
     &:after {
+      transition: filter 1s ease-in, font-size 1s ease-in;
       content: 'dearthfunk';
       display: block;
-      filter: blur(2px);
+      filter: blur(10px) drop-shadow(8px 8px 10px red);
+      font-size: 6em;
     }
   }
 }

@@ -7,6 +7,7 @@ $window-padding: 10vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 a {
@@ -16,16 +17,12 @@ a {
 body {
   font-family: 'Major Mono Display', monospace;
   height: 100vh;
-  padding: $window-padding;
-  user-select: none;
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(-45deg, #000015, #050515, #150505, #000015);
+  width: 100vw;
+  background: linear-gradient(-45deg, #000000, #050525, #250505, #000000);
   background-size: 200% 200%;
-  animation: backgroundMover 60s ease infinite;
-  text-decoration: none;
+  animation: backgroundMover 30s ease infinite;
+  overflow: hidden;
+  padding: 40px; 
 }
 
 @keyframes backgroundMover {
