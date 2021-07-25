@@ -1,45 +1,54 @@
 $LEN: 2s;
+$final-transtion: $LEN * 12;
 $text-mangler-len: $LEN * 6;
 $circle-grow-len: $LEN;
 $size-fade: $LEN * 2;
 $circle-size: 10px;
 $blue: #000080;
 
-.load-animation.running {
-  animation: pulsate $LEN infinite;
-  transform: translate(0,0);
-  .dearthfunk {
-    cursor: pointer;
-    &:after {
-      font-size: 2em;
-      animation: textMangler $text-mangler-len infinite;
-      filter: blur(1px);
-    }
-  }
-}
 .load-animation {
   color: white;
-  animation: hueRotator $LEN infinite;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  transition: transform 1s ease-in-out;
-  transform: translate(0,35vh);
+  flex-direction: column;
+  .msg {
+    font-size: 2rem;
+    padding-top: 30px;
+    font-family: 'Jura', sans-serif;
+    animation: pulsate_brightness $final-transtion infinite;
+  }
   .dearthfunk {
+    animation: hueRotator $final-transtion infinite;
     text-shadow: 2px 2px 2px $blue;
     &:after {
-      transition: filter 1s ease-in, font-size 1s ease-in;
+      transition: font-size 1s ease-in;
       content: 'dearthfunk';
       display: block;
-      filter: blur(5px) brightness(2);
-      font-size: 6em;
+      font-size: 4em;
+      opacity: 0.5;
+    }
+  }
+  &.running {
+    .dearthfunk {
+      animation: pulsate $LEN infinite;
+      transform: translate(0,0);
+      cursor: pointer;
+      &:after {
+        font-size: 2em;
+        animation: textMangler $text-mangler-len infinite;
+        filter: blur(1px);
+        opacity: 1;
+      }
     }
   }
 }
+
 @keyframes hueRotator {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% { filter: hue-rotate(0deg) blur(1px); }
+  50% { filter: hue-rotate(180deg) blur(1.5px); }
+  100% { filter: hue-rotate(360deg) blur(1px); }
 }
 @keyframes textMangler {
   0% {content: 'dearthfunk'}
@@ -62,4 +71,10 @@ $blue: #000080;
   0%   { opacity: 0.4; }
   50%  { opacity: 1; }
   100% { opacity: 0.4; }
+}
+
+@keyframes pulsate_brightness {
+  0%   { filter: brightness(0.5); }
+  50%  { filter: brightness(1); }
+  100% { filter: brightness(0.5); }
 }

@@ -1,8 +1,10 @@
 {{page-title "DearthFunk"}}
-<LoadAnimation @running={{this.running}}/>
+<div class="application">
+  <LoadAnimation @running={{this.running}}/>
 
-{{#unless this.running}}
-  <Menu></Menu>
-{{/unless}}
+  {{#unless this.running}}
+    <Menu></Menu>
+  {{/unless}}
 
-{{outlet}}
+  {{outlet}}
+</div>
