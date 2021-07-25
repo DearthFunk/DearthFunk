@@ -18,20 +18,34 @@ body {
   font-family: 'Major Mono Display', monospace;
   overflow: hidden;
   background-image: url('../background.png');
-  background-size: 100% 100%;
+  background-size: 110% 110%;
+  animation: backgroundShimmer 10s ease infinite;
   .application {
     padding: 40px; 
     height: 100vh;
     width: 100vw;
     background: linear-gradient(-45deg,
       rgba(0,0,0,0.25),
-      rgba(5, 5, 37, 0.25),
-      rgba(37, 5, 5, 0.25),
+      rgba(5, 5, 37, 0.45),
+      rgba(37, 5, 5, 0.45),
       rgba(0,0,0,0.25)
     );
     background-size: 200% 200%;
-    animation: backgroundMover 10s ease infinite;
+    animation: backgroundMover 20s linear infinite;
   }
+}
+
+
+@keyframes backgroundShimmer {
+  0%   { background-position: 0% 0%; }
+  12%  { background-position: 3% 0%; }
+  24%  { background-position: 6% 0%; }
+  36%  { background-position: 6% 3%; }
+  50%  { background-position: 6% 6%; }
+  64%  { background-position: 3% 6%; }
+  76%  { background-position: 0% 6%; }
+  88%  { background-position: 0% 3%; }
+  100% { background-position: 0% 0%; }
 }
 
 @keyframes backgroundMover {
