@@ -1,0 +1,8 @@
+<a href="https://github.com/DearthFunk"
+  aria-disabled={{@loading}}
+  disabled={{@loading}}
+  class="github fade-in {{if @loading 'loading'}}">
+  <img src="GitHub-Mark-Light-120px-plus.png" alt="GitHub">
+</a>
+<div class="name {{if @loading 'loading'}}" role="button" {{on "click" (fn (mut @loading) false)}}></div>
+<div class="msg fade-in {{if @loading 'loading'}}">Tinkerer, Builder, Coder.</div>

@@ -1,5 +1,5 @@
-@import 'loading-animation.scss';
-@import 'menu.scss';
+@import 'animations.scss';
+@import 'info.scss';
 
 $window-padding: 10vh;
 
@@ -18,33 +18,48 @@ body {
   font-family: 'Major Mono Display', monospace;
   overflow: hidden;
   background-image: url('../background.png');
-  background-size: 110% 110%;
-  animation: backgroundShimmer 10s ease infinite;
+  background-size: 120% 120%;
+  animation: backgroundShimmer 20s linear infinite;
   .application {
     padding: 40px; 
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(-45deg,
-      rgba(0,0,0,0.25),
-      rgba(5, 5, 37, 0.45),
-      rgba(37, 5, 5, 0.45),
-      rgba(0,0,0,0.25)
-    );
-    background-size: 200% 200%;
-    animation: backgroundMover 20s linear infinite;
+    display: flex;
+    &.loading {
+      background: linear-gradient(-45deg,
+      rgba(255,255,255,0.75),
+      rgba(250, 246, 8, 0.45),
+      rgba(156, 25, 25, 0.75),
+      rgba(20,20,20,0.85),
+      rgba(0,0,0,0.85)
+      );
+      background-size: 200% 200%;
+      animation: backgroundMover 20s linear infinite;
+    }
+    div {
+      &.left, &.right {
+        min-width: 250px;
+      }
+      &.body {
+        flex-grow: 1;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+        .margin-bottom {
+          margin-bottom: 30px;
+        }
+      }
+    }
   }
 }
 
 
 @keyframes backgroundShimmer {
   0%   { background-position: 0% 0%; }
-  12%  { background-position: 3% 0%; }
-  24%  { background-position: 6% 0%; }
-  36%  { background-position: 6% 3%; }
-  50%  { background-position: 6% 6%; }
-  64%  { background-position: 3% 6%; }
-  76%  { background-position: 0% 6%; }
-  88%  { background-position: 0% 3%; }
+  25%  { background-position: 10% 0%; }
+  50%  { background-position: 10% 10%; }
+  75%  { background-position: 0% 10%; }
   100% { background-position: 0% 0%; }
 }
 

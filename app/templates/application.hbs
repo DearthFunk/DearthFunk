@@ -1,10 +1,14 @@
 {{page-title "DearthFunk"}}
-<div class="application">
-  <LoadAnimation @running={{this.running}}/>
+<div class="application {{if this.loading 'loading'}}">
+  <div class="left">
+    {{#unless this.loading}}
+      <Animations/>
+    {{/unless}}
+  </div>
+  <div class="body">
+    <Info @loading={{this.loading}}/>
+  </div>
+  <div class="right">
 
-  {{#unless this.running}}
-    <Menu></Menu>
-  {{/unless}}
-
-  {{outlet}}
+  </div>
 </div>
