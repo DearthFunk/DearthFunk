@@ -1,9 +1,8 @@
 {{page-title "DearthFunk"}}
+<Canvas/>
 <div class="application {{if this.loading 'loading'}}">
   <div class="left">
-    {{#unless this.loading}}
-      <Animations/>
-    {{/unless}}
+    <Animations @loading={{this.loading}}/>
   </div>
   <div class="body">
     <Info @loading={{this.loading}}/>

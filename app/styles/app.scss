@@ -1,5 +1,6 @@
 @import 'animations.scss';
 @import 'info.scss';
+@import 'canvas.scss';
 
 $window-padding: 10vh;
 
@@ -14,6 +15,14 @@ a {
   text-decoration: none;
 }
 
+.fade-in {
+  opacity: 1;
+  transition: opacity 2s ease-in;
+  &.loading {
+    opacity: 0;
+  }
+}
+
 body {
   font-family: 'Major Mono Display', monospace;
   overflow: hidden;
@@ -25,6 +34,13 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
+    background: linear-gradient(-45deg,
+    rgba(100,100, 100,0.25),
+    rgba(250, 246, 8, 0.15),
+    rgba(156, 25, 25, 0.15),
+    rgba(20,20,20,0.25),
+    rgba(0,0,0,0.25)
+    );
     &.loading {
       background: linear-gradient(-45deg,
       rgba(255,255,255,0.75),
@@ -46,9 +62,6 @@ body {
         text-align: center;
         justify-content: center;
         flex-direction: column;
-        .margin-bottom {
-          margin-bottom: 30px;
-        }
       }
     }
   }

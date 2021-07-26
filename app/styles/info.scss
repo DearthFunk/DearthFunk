@@ -1,43 +1,45 @@
 $LEN: 1s;
-$final-transition: $LEN * 12;
-$text-mangler-len: $LEN * 6;
+$transition_speed: $LEN * 3;
+$pulsate: pulsate_brightness ($LEN * 10) infinite;
 
+.github {
+  margin-bottom: 40px;
+  animation: $pulsate;
+  img {
+    transform: scale(1);
+    transition: transform 200ms ease-in;
+  }
+  img:hover {
+    animation: none;
+    transform: scale(1.1);
+  }
+}
 .msg {
   color: #FFFFFF;
   font-size: 1rem;
   font-family: 'Jura', sans-serif;
-  margin-top: 10px;
-  animation: pulsate_brightness $LEN infinite;
+  margin: 10px 0;
+  animation: $pulsate;
 }
-.github {
-  margin-bottom: 40px;
-  animation: pulsate_brightness $LEN infinite;
+.mail {
+  font-family: 'Jura', sans-serif;
+  animation: $pulsate;
 }
-.fade-in {
-  opacity: 1;
-  transition: opacity ($LEN * 5) ease-out;
-  &.loading {
-    opacity: 0;
-  }
-}
-.msg.loading, .github.loading {
+.msg.loading, .github.loading, .mail.loading {
   opacity: 0;
 }
 
 .name {
   color: #FFFFFF;
-  animation: hueRotator ($LEN * 12) infinite;
-  text-shadow: 1px 1px 1px #0000AA;
+  animation: $pulsate;
   &:after {
-    transition: font-size 1s ease-in;
+    transition: font-size 500ms ease-in;
     content: 'dearthfunk';
     display: block;
     font-size: 3em;
-    opacity: 0.5;
   }
   &.loading {
-    cursor: pointer;
-    animation: pulsate ($LEN * 2) infinite;
+    text-shadow: 1px 1px 1px #0000AA;
     cursor: pointer;
     &:after {
       font-size: 2em;
@@ -47,12 +49,12 @@ $text-mangler-len: $LEN * 6;
     }
   }
 }
-
-@keyframes hueRotator {
-  0% { filter: hue-rotate(0deg) blur(1px); }
-  50% { filter: hue-rotate(180deg) blur(1.5px); }
-  100% { filter: hue-rotate(360deg) blur(1px); }
+@keyframes pulsate_brightness {
+  0%   { filter: brightness(0.5); }
+  50%  { filter: brightness(1); }
+  100% { filter: brightness(0.5); }
 }
+
 @keyframes textMangler {
   0% {content: 'dearthfunk'}
   2% {content: 'de@rthf_nk'}
@@ -79,16 +81,4 @@ $text-mangler-len: $LEN * 6;
   91% { content: '__        '}
   94% { content: '_         '}
   98% { content: '          '}
-}
-
-@keyframes pulsate {
-  0%   { opacity: 0.4; }
-  50%  { opacity: 1; }
-  100% { opacity: 0.4; }
-}
-
-@keyframes pulsate_brightness {
-  0%   { filter: brightness(0.5); }
-  50%  { filter: brightness(1); }
-  100% { filter: brightness(0.5); }
 }
