@@ -1,6 +1,6 @@
 $LEN: 1s;
 $transition_speed: $LEN * 3;
-$pulsate: pulsate_brightness ($LEN * 10) infinite;
+$pulsate: pulsate_brightness ($LEN * 2) infinite;
 
 .github {
   margin-bottom: 40px;
@@ -22,6 +22,7 @@ $pulsate: pulsate_brightness ($LEN * 10) infinite;
   animation: $pulsate;
 }
 .mail {
+  color: #FFFFFF;
   font-family: 'Jura', sans-serif;
   animation: $pulsate;
 }
@@ -50,9 +51,9 @@ $pulsate: pulsate_brightness ($LEN * 10) infinite;
   }
 }
 @keyframes pulsate_brightness {
-  0%   { filter: brightness(0.5); }
+  0%   { filter: brightness(0.8); }
   50%  { filter: brightness(1); }
-  100% { filter: brightness(0.5); }
+  100% { filter: brightness(0.8); }
 }
 
 @keyframes textMangler {

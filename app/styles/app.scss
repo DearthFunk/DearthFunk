@@ -29,29 +29,39 @@ body {
   background-image: url('../background.png');
   background-size: 120% 120%;
   animation: backgroundShimmer 20s linear infinite;
+
+  //todo: only exists due to some issue with transition fading between linear-gradients
+  .blender-animation {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(-45deg,
+    rgba(255, 255, 255, 1),
+    rgba(250, 246, 8, 0.45),
+    rgba(156, 25, 25, 0.75),
+    rgba(20, 20, 20, 0.85),
+    rgba(0, 0, 0, 0.85)
+    );
+    background-size: 200% 200%;
+    animation: backgroundMover 20s linear infinite;
+    opacity: 0;
+    transition: opacity 5s ease-out;
+    &.loading {
+      opacity: 1;
+    }
+  }
   .application {
     padding: 40px; 
     height: 100vh;
     width: 100vw;
     display: flex;
     background: linear-gradient(-45deg,
-    rgba(100,100, 100,0.25),
-    rgba(250, 246, 8, 0.15),
-    rgba(156, 25, 25, 0.15),
-    rgba(20,20,20,0.25),
-    rgba(0,0,0,0.25)
+      rgba(0, 0, 0, 0.25),
+      rgba(250, 246, 8, 0.2),
+      rgba(156, 25, 25, 0.5),
+      rgba(20, 20, 20, 0.25),
+      rgba(0, 0, 0, 1)
     );
-    &.loading {
-      background: linear-gradient(-45deg,
-      rgba(255,255,255,0.75),
-      rgba(250, 246, 8, 0.45),
-      rgba(156, 25, 25, 0.75),
-      rgba(20,20,20,0.85),
-      rgba(0,0,0,0.85)
-      );
-      background-size: 200% 200%;
-      animation: backgroundMover 20s linear infinite;
-    }
     div {
       &.left, &.right {
         min-width: 250px;
