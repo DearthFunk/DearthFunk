@@ -1,11 +1,10 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 
 export default class CanvasComponent extends Component {
 
-  @tracked ctx;
-  constructor() {
-    super(...arguments);
-    this.ctx = null;
+  @action
+  onDidInsert() {
+    canvas = document.getElementById('animation-canvas');
+    ctx = canvas.getContext('2d');
   }
 }

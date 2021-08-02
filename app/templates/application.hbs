@@ -1,7 +1,7 @@
 {{page-title "DearthFunk"}}
-<Canvas/>
+<Canvas width={{this.width}} height={{this.height}}/>
 <div class="blender-animation {{if this.loading 'loading'}}"></div>
-<div class="application {{if this.loading 'loading'}}">
+<div class="application {{if this.loading 'loading'}}" {{did-resize this.didResize}}>
   <div class="left">
     <Animations @loading={{this.loading}}/>
   </div>
