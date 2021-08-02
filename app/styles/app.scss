@@ -45,7 +45,7 @@ body {
     background-size: 200% 200%;
     animation: backgroundMover 20s linear infinite;
     opacity: 0;
-    transition: opacity 5s ease-out;
+    transition: opacity 5s linear;
     &.loading {
       opacity: 1;
     }
@@ -87,7 +87,9 @@ body {
 }
 
 @keyframes backgroundMover {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0%   { background-position: 0% 0%; }
+  25%  { background-position: 0% 100%; }
+  50%  { background-position: 100% 100%; }
+  75%  { background-position: 100% 0%; }
+  100% { background-position: 0% 0%; }
 }
