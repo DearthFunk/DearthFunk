@@ -1,6 +1,9 @@
 <div class="animations fade-in {{if @loading 'loading'}}">
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
-  <div class="circle"></div>
+  {{#each this.animations.animations as |animation|}}
+    <button class="circle" type="button" {{on "click" (fn this.animations.selectAnimation animation)}}>
+      {{#if (eq this.animations.selectedAnimation animation)}}
+        {{this.animations.selectedAnimation.name}}
+      {{/if}}
+    </button>
+  {{/each}}
 </div>
