@@ -18,11 +18,20 @@ export default class AnimationsService extends Service {
   @tracked mouseY;
   
   get state() {
+    let wCenter = this.canvas.width / 2;
+    let hCenter = this.canvas.height / 2;
     return {
       w: this.canvas.width,
       h: this.canvas.height,
       x: this.mouseX,
-      y: this.mouseY
+      y: this.mouseY,
+      wCenter,
+      hCenter,
+      mainRadius: hCenter,
+      mouseDistanceFromCenter: Math.sqrt(
+				Math.pow(this.mouseX - wCenter, 2) +
+				Math.pow(this.mouseY - hCenter, 2)
+			)
     }
   }
 

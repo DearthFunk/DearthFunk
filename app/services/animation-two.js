@@ -3,6 +3,7 @@ import Service from '@ember/service';
 export default class AnimationTwoService extends Service {
   name = 'two';
 
+  //https://github.com/DearthFunk/Animations/blob/master/animations/squares.service.js 
   runLoop(ctx, state) {
     ctx.beginPath();
     let centerX = Math.random() * state.w;

@@ -2,7 +2,7 @@ import Service from '@ember/service';
 
 export default class AnimationThreeService extends Service {
   name = 'three';
-
+//https://github.com/DearthFunk/Animations/blob/master/animations/lineConnections.service.js
   runLoop(ctx, state) {
     ctx.beginPath();
     let centerX = Math.random() * state.w;
