@@ -21,5 +21,12 @@
       border: 1px solid white;
       background: radial-gradient(#DDDDFF, transparent 75%);
     }
+    &.control {
+      width: 35px;
+      height: 35px;
+    }
+    &.selected {
+      background: radial-gradient(#FF9999, transparent);
+    }
   }
 }

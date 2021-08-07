@@ -1,14 +1,13 @@
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
-export default class AnimationOneService extends Service {
-  name = 'one';
+  //https://github.com/DearthFunk/Animations/blob/master/animations/ring.service.js 
+  export default class AnimationOneService extends Service {
+  label = 'Ø';
   @tracked ringClusterAngle = 0;
   @tracked ringDots = [];
   ringTotalDots = 10;
   ringTotalClusters = 60;
-
-  //https://github.com/DearthFunk/Animations/blob/master/animations/ring.service.js 
 
   getRandomNumber(from, to) {
     return Number(Math.random()*(to-from)+from)

@@ -40,6 +40,8 @@ export default class AnimationsService extends Service {
     this.canvas = document.getElementById('animation-canvas');
     this.ctx = this.canvas.getContext('2d');
     document.onmousemove = this.mouseMoveEvent;
+    //initialize each service, sets up some basic data objects for manipulating
+    this.animations.forEach(animation => animation.initialize?.());
   }
 
   @action
