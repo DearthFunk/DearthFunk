@@ -1,8 +1,8 @@
 <div class="animations fade-in">
-  {{#each this.animations.selectedAnimation.rotations as |rotation index|}}
-    <button class="circle control {{if rotation 'selected'}}" type="button"
-      {{!-- {{on "click" (fn (mut rotation) (not rotation))}}> --}}
-      {{on "click" (fn this.animations.selectedAnimation.toggleRotation index)}}>
+  {{#each @controls as |control index|}}
+    <button class="circle control {{if control.value 'selected'}}" type="button"
+      {{on "click" (fn (mut control.value) (not control.value))}}>
+      {{control.label}}
     </button>
   {{/each}}
 </div>

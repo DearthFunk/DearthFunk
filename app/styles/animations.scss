@@ -17,16 +17,18 @@
     background: radial-gradient(white, transparent);
     transition: filter 200ms ease-in-out, opacity 100ms ease-in-out;
     &:hover {
+      background: radial-gradient(#FF7777, transparent 75%);
+    }
+    &.selected {
+      background: radial-gradient(#7777FF, transparent 75%);
+    } 
+    &:hover, &.selected {
       filter: blur(0px);
       border: 1px solid white;
-      background: radial-gradient(#DDDDFF, transparent 75%);
     }
     &.control {
       width: 35px;
       height: 35px;
-    }
-    &.selected {
-      background: radial-gradient(#FF9999, transparent);
     }
   }
 }

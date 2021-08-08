@@ -1,14 +1,24 @@
 {{page-title "DearthFunk"}}
 <div class="blender-animation {{if this.loading 'loading'}}"></div>
-<div class="application {{if this.loading 'loading'}}" {{did-resize this.didResize}}>
-  <Canvas width={{this.width}} height={{this.height}}/>
+<div class="application {{if this.loading 'loading'}}"
+  {{did-resize this.didResize}}>
+  <Canvas
+    width={{this.width}}
+    height={{this.height}}
+    @onCanvasInserted={{this.animations.onCanvasInserted}}/>
   <div class="left">
-    <Animations @loading={{this.loading}}/>
+    <Animations
+      @loading={{this.loading}}
+      @animations={{this.animations.animations}}
+      @selectAnimation={{this.animations.selectAnimation}}
+      @selectedAnimation={{this.animations.selectedAnimation}}/>
   </div>
   <div class="body">
-    <Info @loading={{this.loading}}/>
+    <Info
+      @loading={{this.loading}}/>
   </div>
   <div class="right">
-    <AnimationControls/>
+    <AnimationControls
+      @controls={{this.controls}}/>
   </div>
 </div>

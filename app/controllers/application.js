@@ -1,11 +1,14 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
+import { action, computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class ApplicationController extends Controller {
   @tracked loading = true;
   @tracked width = 0;
   @tracked height = 0;
+  @service animations;
+  @computed.alias('animations.selectedAnimation.controls') controls;
 
   // https://stackoverflow.com/questions/2588181/canvas-is-stretched-when-using-css-but-normal-with-width-height-properties
   // https://html.spec.whatwg.org/multipage/canvas.html#attr-canvas-width
