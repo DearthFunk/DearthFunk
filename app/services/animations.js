@@ -37,8 +37,8 @@ class Circle {
   label = 'Ø';
   ringClusterAngle = 0;
   ringDots = [];
-  dotsPerCluster = 20;
-  ringTotalClusters = 100;
+  dotsPerCluster = 10;
+  ringTotalClusters = 50;
   radius = 250;
 
   newRingDot () {
@@ -97,7 +97,7 @@ class Circle {
 class Square {
   //https://github.com/DearthFunk/Animations/blob/master/animations/squares.service.js 
   label = 'µ';
-  squaresTotal = 100;
+  squaresTotal = 40;
   squaresLevels = 12;
   squaresHoverRadiusAdjust = 2;
   squares = [];
@@ -235,7 +235,7 @@ class Cylinder {
 class Gogh {
   // https://github.com/DearthFunk/Animations/blob/master/animations/galaxy.service.js
   label = 'Æ';
-  galaxyTotalStars = 350;
+  galaxyTotalStars = 150;
   galaxyStars = [];
   galaxyMagnifyingGlass = 150;
   globalCompositeOperation = 'multiply';
@@ -258,7 +258,7 @@ class Gogh {
   runLoop(ctx, state) {
     fadeCanvas(ctx, state.w, state.h, 0.99);
     this.galaxyStars.forEach((spin, index) => {
-      let orbit = 1 + (350 * spin.orbit);
+      let orbit = 1 + (250 * spin.orbit);
       spin.angle += (spin.speed / 100);
       spin.x = state.wCenter + (Math.cos(index + spin.angle) * orbit);
       spin.y = state.hCenter + (Math.sin(index + spin.angle) * orbit);
