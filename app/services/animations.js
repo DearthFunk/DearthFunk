@@ -177,11 +177,10 @@ class Cylinder {
   //https://github.com/DearthFunk/Animations/blob/master/animations/lineConnections.service.js
   label = 'ƒ';
   galaxyStars = [];
-  galaxyTotalStars = 200;
-  lineFlux = 90;
-  orbitFlux = 200;
-  hPadding = 400;
-  wPadding = 260;
+  galaxyTotalStars = 150;
+  lineFlux = 75;
+  orbitFlux = 150;
+  sidePadding = 200;
   twoPI = Math.PI * 2;
 
   constructor() {
@@ -192,7 +191,7 @@ class Cylinder {
 				xD: 0,
 				yD: 0,
 				angle: 0,
-				speed: getRandomNumber(0.001, 0.009, 3),
+				speed: getRandomNumber(0.001, 0.05, 3),
 				orbit: Math.random() * this.orbitFlux
 			});
 		}
@@ -200,18 +199,18 @@ class Cylinder {
 
   runLoop(ctx, state) {
     fadeCanvas(ctx, state.w, state.h, 0.9);
-    let w = state.w - (this.wPadding * 2);
-    let h = state.h - (this.hPadding * 2);
-
+    //ctx.clearRect(0, 0, state.w, state.h);
+    let cylinderWidth = state.w - (this.sidePadding * 2);
+    let cylinderHeight = 150; //remember: this is in addition to flux
     this.galaxyStars.forEach((star, index) => {
       star.angle += star.speed;
-      star.xD = this.wPadding + (
-        Math.floor(star.x * w + (
+      star.xD = this.sidePadding + (
+        Math.floor(star.x * cylinderWidth + (
           Math.cos(index + star.angle) * star.orbit
         ))
       );
-      star.yD = this.hPadding + (
-        Math.floor(star.y * h + (
+      star.yD = (state.hCenter - (cylinderHeight / 2)) + (
+        Math.floor(star.y * cylinderHeight + (
           Math.sin(index + star.angle) * star.orbit
         ))
       );
@@ -219,15 +218,15 @@ class Cylinder {
 
     for (let a = 0; a < this.galaxyStars.length; a++) {
       let p1 = this.galaxyStars[a];
-      for (let b = a; b < this.galaxyStars.length; b++) {
+      for (let b = a + 1; b < this.galaxyStars.length; b++) {
         let p2 = this.galaxyStars[b];
         let d = distance(p1.xD, p1.yD, p2.xD, p2.yD);
 
         if (d < this.lineFlux) {
           ctx.beginPath();
-          let opacity = d / this.lineFlux;
+          let opacity = 1 - parseFloat((d / this.lineFlux).toFixed(2));
           ctx.strokeStyle = `rgba(0,0,0,${opacity})`;
-          ctx.lineWidth = 1 - opacity;
+          ctx.lineWidth = 2;
           ctx.moveTo(p1.xD, p1.yD);
           ctx.lineTo(p2.xD, p2.yD);
           ctx.stroke();
