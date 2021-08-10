@@ -336,7 +336,7 @@ export default class AnimationsService extends Service {
 
   @action
   selectAnimation(animation) {
-    this.ctx.clearRect(0, 0, this.state.width, this.state.height);
+    this.ctx.clearRect(0, 0, this.state.w, this.state.h);
     if (animation == this.selectedAnimation) {
       this.selectedAnimation = null;
     }
