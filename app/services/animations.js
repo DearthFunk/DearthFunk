@@ -175,7 +175,6 @@ class Square {
       });
     });
   }
-
 }
 
 class Cylinder {
@@ -202,9 +201,7 @@ class Cylinder {
 		}
   }
 
-  runLoop(ctx, state) {
-    fadeCanvas(ctx, state.w, state.h, 0.9);
-    //ctx.clearRect(0, 0, state.w, state.h);
+  updateLoop(state) {
     let cylinderWidth = state.w - (this.sidePadding * 2);
     let cylinderHeight = 150; //remember: this is in addition to flux
     this.galaxyStars.forEach((star, index) => {
@@ -220,7 +217,11 @@ class Cylinder {
         ))
       );
     });
+  }
 
+  runLoop(ctx, state) {
+    fadeCanvas(ctx, state.w, state.h, 0.9);
+    //ctx.clearRect(0, 0, state.w, state.h);
     for (let a = 0; a < this.galaxyStars.length; a++) {
       let p1 = this.galaxyStars[a];
       for (let b = a + 1; b < this.galaxyStars.length; b++) {
@@ -245,41 +246,43 @@ class Cylinder {
 class Gogh {
   // https://github.com/DearthFunk/Animations/blob/master/animations/galaxy.service.js
   label = 'Æ';
-  galaxyTotalStars = 150;
-  galaxyStars = [];
+  galaxyStars = [...Array(150).keys()];;
   galaxyMagnifyingGlass = 150;
   globalCompositeOperation = 'multiply';
 
   constructor() {
-    for (let i = 0; i < this.galaxyTotalStars; i++) {
-			this.galaxyStars.push({
-				x: 0,
-				y: 0,
-				size: getRandomNumber(0.01, 3, 2),
-				angle: 0,
-				speed: Math.random() * 2,
-				targetSize: 1,
-				orbit: Math.random(),
-        fillStyle: randomRgba()
-			});
-		}
+
+    this.galaxyStars.forEach((oldStar, index) => {
+      this.galaxyStars[index] = {
+        x: 0,
+        y: 0,
+        size: getRandomNumber(0.01, 3, 2),
+        angle: 0,
+        speed: Math.random() * 2,
+        targetSize: 1,
+        orbit: Math.random(),
+        fillStyle: randomRgba(),
+      }
+    });
   }
 
-  runLoop(ctx, state) {
-    fadeCanvas(ctx, state.w, state.h, 0.9);
+  updateLoop(state) {
     this.galaxyStars.forEach((spin, index) => {
       let orbit = 1 + (250 * spin.orbit);
       spin.angle += (spin.speed / 100);
       spin.x = state.wCenter + (Math.cos(index + spin.angle) * orbit);
       spin.y = state.hCenter + (Math.sin(index + spin.angle) * orbit);
+      spin.d = distance(spin.x, spin.y, state.mouseX, state.mouseY); 
+      spin.r = !(spin.d > this.galaxyMagnifyingGlass) ? spin.size * (this.galaxyMagnifyingGlass - spin.d) * 0.1 : spin.size;
+    });
+  }
 
-      let d = distance(spin.x, spin.y, state.mouseX, state.mouseY);
-      //todo: fix this r & radius jazz
-      let r = !(d > this. galaxyMagnifyingGlass);
-      let radius = r ? spin.size * (this. galaxyMagnifyingGlass-d) * 0.1 : spin.size;
+  runLoop(ctx, state) {
+    fadeCanvas(ctx, state.w, state.h, 0.9);
+    this.galaxyStars.forEach((spin) => {
       ctx.beginPath();
       ctx.fillStyle = spin.fillStyle;
-      ctx.arc(spin.x, spin.y, radius, 0, Math.PI * 2, true);
+      ctx.arc(spin.x, spin.y, spin.r, 0, Math.PI * 2, true);
       ctx.fill();
       ctx.closePath();
     });
@@ -351,7 +354,8 @@ export default class AnimationsService extends Service {
       let now = performance.now();
       let elapsedTime = (now - this.lastAnimationTime) / 1000;
       if (elapsedTime > this.fps) {
-        this.selectedAnimation.runLoop(this.ctx, this.state);
+        this.selectedAnimation.updateLoop?.(this.state);
+        this.selectedAnimation.runLoop?.(this.ctx, this.state);
         this.lastAnimationTime = performance.now();
       }
       requestAnimationFrame( this.animLoop );
