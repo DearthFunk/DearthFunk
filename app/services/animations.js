@@ -2,6 +2,12 @@ import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
+/*
+  SOME ARTICLES THAT WERE USEFULL
+  https://spicyyoghurt.com/tutorials/html5-javascript-game-development/create-a-smooth-canvas-animation 
+
+*/
+
 let getRandomNumber = (from, to, decimals) => {
   let response = decimals === undefined ?
     Number(Math.random()*(to-from)+from) :
@@ -131,7 +137,6 @@ class Square {
     this.updateColors();
   }
 
-  //      
   updateColors() {
     this.squareLevelColors.forEach((oldColor, index) => {
       let opacity = parseFloat((1 - (index / this.squareLevelColors.length)).toFixed(2));
@@ -252,7 +257,7 @@ class Gogh {
 				y: 0,
 				size: getRandomNumber(0.01, 3, 2),
 				angle: 0,
-				speed: Math.random(),
+				speed: Math.random() * 2,
 				targetSize: 1,
 				orbit: Math.random(),
         fillStyle: randomRgba()
@@ -261,7 +266,7 @@ class Gogh {
   }
 
   runLoop(ctx, state) {
-    fadeCanvas(ctx, state.w, state.h, 0.99);
+    fadeCanvas(ctx, state.w, state.h, 0.9);
     this.galaxyStars.forEach((spin, index) => {
       let orbit = 1 + (250 * spin.orbit);
       spin.angle += (spin.speed / 100);
@@ -281,7 +286,7 @@ class Gogh {
   }
 }
 export default class AnimationsService extends Service {
-  fps = 1/60;
+  fps = 1/30;
   lastAnimationTime = 0;
   ctx;
   canvas;
@@ -305,11 +310,10 @@ export default class AnimationsService extends Service {
     return {
       w: this.canvas.width,
       h: this.canvas.height,
-      mouseX: this.mouseX,
-      mouseY: this.mouseY,
       wCenter,
       hCenter,
-      mainRadius: hCenter,
+      mouseX: this.mouseX,
+      mouseY: this.mouseY,
       mouseDistanceFromCenter: distance(this.mouseX, this.mouseY, wCenter, hCenter)
     }
   }
@@ -329,9 +333,9 @@ export default class AnimationsService extends Service {
 
   @action
   selectAnimation(animation) {
+    this.ctx.clearRect(0, 0, this.state.width, this.state.height);
     if (animation == this.selectedAnimation) {
       this.selectedAnimation = null;
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     else {
       this.selectedAnimation = animation;
@@ -344,11 +348,11 @@ export default class AnimationsService extends Service {
   @action
   animLoop() {
     if (this.selectedAnimation) {
-      let now = new Date().getTime();
+      let now = performance.now();
       let elapsedTime = (now - this.lastAnimationTime) / 1000;
       if (elapsedTime > this.fps) {
         this.selectedAnimation.runLoop(this.ctx, this.state);
-        this.lastAnimationTime = new Date().getTime();
+        this.lastAnimationTime = performance.now();
       }
       requestAnimationFrame( this.animLoop );
     }
