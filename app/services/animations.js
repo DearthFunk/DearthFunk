@@ -3,13 +3,13 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 let getRandomNumber = (from, to, decimals) => {
-  let response = decimals ?
-    Number((Math.random()*(Number(to)-Number(from))+Number(from)).toFixed(decimals)) :
-    Number(Math.random()*(to-from)+from)
+  let response = decimals === undefined ?
+    Number(Math.random()*(to-from)+from) :
+    Number((Math.random()*(Number(to)-Number(from))+Number(from)).toFixed(decimals));
   return response;
 }
 
-let randomRgba = (opacity = getRandomNumber(0, 1, 4)) => {
+let randomRgba = (opacity = getRandomNumber(0, 1, 2)) => {
   var r = getRandomNumber(0,255,0);
   var g = getRandomNumber(0,255,0);
   var b = getRandomNumber(0,255,0);
@@ -97,62 +97,68 @@ class Circle {
 class Square {
   //https://github.com/DearthFunk/Animations/blob/master/animations/squares.service.js 
   label = 'µ';
-  squaresTotal = 40;
-  squaresLevels = 12;
-  squaresHoverRadiusAdjust = 2;
+  _squaresTotal = 40;
+  squareLevelColors = [...Array(12).keys()];
   squares = [];
-  squaresLevelColors = [];
   rotate = 0;
   point1 = {x:-1, y:-1};
   point2 = {x:-1, y:-1};
   point3 = {x:-1, y:-1};
   point4 = {x:-1, y:-1};
   @tracked controls = [
-    { label: 'x1', value: true },
-    { label: 'y1', value: false },
-    { label: 'x2', value: true },
-    { label: 'y2', value: false },
-    { label: 'x3', value: true },
-    { label: 'y3', value: false },
-    { label: 'x4', value: true },
-    { label: 'y4', value: false }
+    { label: 'X-1', value: false },
+    { label: 'Y-1', value: true },
+    { label: 'X-2', value: true },
+    { label: 'Y-2', value: false },
+    { label: 'X-3', value: true },
+    { label: 'Y-3', value: false },
+    { label: 'X-4', value: true },
+    { label: 'Y-4', value: false }
   ];
 
   constructor() {
-    for (let i = 0; i < this.squaresLevels; i++) {
-      let opacity = 1 - (i / this.squaresLevels);
-      this.squaresLevelColors.push(randomRgba(opacity));
-    }
-    for (let i = 0; i < this.squaresTotal; i++) {
+    for (let i = 0; i < this._squaresTotal; i++) {
       this.squares.push({
         x: -1,
         y: -1,
         angle: 0
       });
     }
+    this.updateColors();
+  }
+
+  animationChangeEvent() {
+    this.updateColors();
+  }
+
+  //      
+  updateColors() {
+    this.squareLevelColors.forEach((oldColor, index) => {
+      let opacity = parseFloat((1 - (index / this.squareLevelColors.length)).toFixed(2));
+      this.squareLevelColors[index] = randomRgba(opacity);
+    });
   }
 
   runLoop(ctx, state) {
     ctx.clearRect(0, 0, state.w, state.h);
     this.rotate += 0.1;
 
-    for (let lvl = 1; lvl < this.squaresLevels + 1; lvl++ ) {
-      ctx.strokeStyle = this.squaresLevelColors[lvl];
+    this.squareLevelColors.forEach((color, lvl) => {
       let growth = Math.pow(lvl * 1.5, 2);
-      for (let squareNum = 0; squareNum < this.squaresTotal; squareNum++) {
-        let square = this.squares[squareNum];
+      ctx.strokeStyle = color;
+      this.squares.forEach((square, squareNum) => {
         square.angle += Math.min(200, state.mouseDistanceFromCenter) / 200 * 0.001;
         let directionToggle = (lvl % 2 === 0 ? -1 : 1);
         let squareAngle = square.angle * directionToggle;
 
-        this.point1.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[0].value ? this.squaresHoverRadiusAdjust : 1) + (1/2*Math.PI) )) * growth;
-        this.point1.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[1].value ? this.squaresHoverRadiusAdjust : 1) + (1/2*Math.PI) )) * growth;
-        this.point2.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[2].value ? this.squaresHoverRadiusAdjust : 1) + (2/2*Math.PI) )) * growth;
-        this.point2.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[3].value ? this.squaresHoverRadiusAdjust : 1) + (2/2*Math.PI) )) * growth;
-        this.point3.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[4].value ? this.squaresHoverRadiusAdjust : 1) + (3/2*Math.PI) )) * growth;
-        this.point3.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[5].value ? this.squaresHoverRadiusAdjust : 1) + (3/2*Math.PI) )) * growth;
-        this.point4.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[6].value ? this.squaresHoverRadiusAdjust : 1) + (4/2*Math.PI) )) * growth;
-        this.point4.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[7].value ? this.squaresHoverRadiusAdjust : 1) + (4/2*Math.PI) )) * growth;
+        this.point1.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[0].value ? 2 : 1) + (1/2*Math.PI) )) * growth;
+        this.point1.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[1].value ? 2 : 1) + (1/2*Math.PI) )) * growth;
+        this.point2.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[2].value ? 2 : 1) + (2/2*Math.PI) )) * growth;
+        this.point2.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[3].value ? 2 : 1) + (2/2*Math.PI) )) * growth;
+        this.point3.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[4].value ? 2 : 1) + (3/2*Math.PI) )) * growth;
+        this.point3.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[5].value ? 2 : 1) + (3/2*Math.PI) )) * growth;
+        this.point4.x = state.wCenter + Math.cos(squareNum + (squareAngle *(this.controls[6].value ? 2 : 1) + (4/2*Math.PI) )) * growth;
+        this.point4.y = state.hCenter + Math.sin(squareNum + (squareAngle *(this.controls[7].value ? 2 : 1) + (4/2*Math.PI) )) * growth;
         ctx.beginPath();
         ctx.moveTo(this.point1.x, this.point1.y);
         ctx.lineTo(this.point2.x, this.point2.y);
@@ -161,8 +167,8 @@ class Square {
         ctx.lineTo(this.point1.x, this.point1.y);
         ctx.stroke();
         ctx.closePath();
-      }
-    }
+      });
+    });
   }
 
 }
@@ -276,6 +282,8 @@ class Gogh {
   }
 }
 export default class AnimationsService extends Service {
+  fps = 1/60;
+  lastAnimationTime = 0;
   ctx;
   canvas;
   mouseX;
@@ -328,6 +336,7 @@ export default class AnimationsService extends Service {
     }
     else {
       this.selectedAnimation = animation;
+      this.selectedAnimation.animationChangeEvent?.();
       this.ctx.globalCompositeOperation = this.selectedAnimation.globalCompositeOperation ?? 'source-over';
       this.animLoop();
     }
@@ -336,8 +345,13 @@ export default class AnimationsService extends Service {
   @action
   animLoop() {
     if (this.selectedAnimation) {
+      let now = new Date().getTime();
+      let elapsedTime = (now - this.lastAnimationTime) / 1000;
+      if (elapsedTime > this.fps) {
+        this.selectedAnimation.runLoop(this.ctx, this.state);
+        this.lastAnimationTime = new Date().getTime();
+      }
       requestAnimationFrame( this.animLoop );
-      this.selectedAnimation.runLoop(this.ctx, this.state);
     }
   }
 }
