@@ -5,6 +5,9 @@
   <a href="https://www.youtube.com/channel/UCjqaaKr5_B3-WgbfdIszlgA" disabled={{@loading}}>
     <img src="youtube.png" alt="Youtube" width="120" height="120">
   </a>
+  <a href="https://soundcloud.com/user-777484854" disabled={{@loading}}>
+    <img src="soundcloud.png" alt="SoundCloud" width="120" height="120">
+  </a>
 </div>
 <div class="name {{if @loading 'loading'}}" role="button" {{on "click" (fn (mut @loading) false)}}></div>
 <div class="msg fade-in {{if @loading 'loading'}}">Tinkerer, Builder, Coder, Musician.</div>
