@@ -27,7 +27,7 @@ class AnimationGogh extends Animation {
       spin.angle += (spin.speed / 100);
       spin.x = state.wCenter + (Math.cos(index + spin.angle) * orbit);
       spin.y = state.hCenter + (Math.sin(index + spin.angle) * orbit);
-      spin.d = distance(spin.x, spin.y, state.mouseX, state.mouseY); 
+      spin.d = Math.distance(spin.x, spin.y, state.mouseX, state.mouseY); 
       spin.r = !(spin.d > this.galaxyMagnifyingGlass) ? spin.size * (this.galaxyMagnifyingGlass - spin.d) * 0.1 : spin.size;
     });
   }

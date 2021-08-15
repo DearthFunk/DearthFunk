@@ -17,6 +17,15 @@ export default class AnimationsService extends Service {
   ];
   @tracked selectedAnimation;
   
+  constructor(){
+    Math.distance = function(x1, y1, x2, y2) {
+      return Math.sqrt(
+        Math.pow(x1 - x2, 2) +
+        Math.pow(y1 - y2, 2)
+      );
+    }
+    super(...arguments);
+  }
   get controls() {
     return this.selectedAnimation?.controls;
   }
@@ -31,7 +40,7 @@ export default class AnimationsService extends Service {
       hCenter,
       mouseX: this.mouseX,
       mouseY: this.mouseY,
-      mouseDistanceFromCenter: distance(this.mouseX, this.mouseY, wCenter, hCenter)
+      mouseDistanceFromCenter: Math.distance(this.mouseX, this.mouseY, wCenter, hCenter)
     }
   }
 

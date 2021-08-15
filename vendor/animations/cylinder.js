@@ -48,7 +48,7 @@ class AnimationCylinder extends Animation {
       let p1 = this.galaxyStars[a];
       for (let b = a + 1; b < this.galaxyStars.length; b++) {
         let p2 = this.galaxyStars[b];
-        let d = distance(p1.xD, p1.yD, p2.xD, p2.yD);
+        let d = Math.distance(p1.xD, p1.yD, p2.xD, p2.yD);
 
         if (d < this.lineFlux) {
           ctx.beginPath();
