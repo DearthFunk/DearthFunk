@@ -1,11 +1,11 @@
 
+// https://github.com/DearthFunk/Animations/blob/master/animations/ring.service.js 
 class AnimationCircle extends Animation {
-  // https://github.com/DearthFunk/Animations/blob/master/animations/ring.service.js 
   label = 'Ø';
   ringClusterAngle = 0;
   ringDots = [];
   dotsPerCluster = 10;
-  ringTotalClusters = 50;
+  ringTotalClusters = 30;
   radius = 250;
 
   newRingDot () {

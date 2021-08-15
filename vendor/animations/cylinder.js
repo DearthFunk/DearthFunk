@@ -1,5 +1,5 @@
+// https://github.com/DearthFunk/Animations/blob/master/animations/lineConnections.service.js
 class AnimationCylinder extends Animation {
-  //https://github.com/DearthFunk/Animations/blob/master/animations/lineConnections.service.js
   label = 'ƒ';
   galaxyStars = [];
   galaxyTotalStars = 150;

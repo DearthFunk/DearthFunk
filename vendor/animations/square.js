@@ -1,8 +1,6 @@
 
+//https://github.com/DearthFunk/Animations/blob/master/animations/squares.service.js 
 class AnimationSquare extends Animation {
-//  import { tracked } from '@glimmer/tracking';
-
-  //https://github.com/DearthFunk/Animations/blob/master/animations/squares.service.js 
   label = 'µ';
   _squaresTotal = 40;
   squareLevelColors = [...Array(12).keys()];

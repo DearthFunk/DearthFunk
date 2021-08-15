@@ -1,5 +1,5 @@
+// https://github.com/DearthFunk/Animations/blob/master/animations/galaxy.service.js
 class AnimationGogh extends Animation {
-  // https://github.com/DearthFunk/Animations/blob/master/animations/galaxy.service.js
   label = 'Æ';
   galaxyStars = [...Array(150).keys()];;
   galaxyMagnifyingGlass = 150;
@@ -28,7 +28,7 @@ class AnimationGogh extends Animation {
       spin.x = state.wCenter + (Math.cos(index + spin.angle) * orbit);
       spin.y = state.hCenter + (Math.sin(index + spin.angle) * orbit);
       spin.d = Math.distance(spin.x, spin.y, state.mouseX, state.mouseY); 
-      spin.r = !(spin.d > this.galaxyMagnifyingGlass) ? spin.size * (this.galaxyMagnifyingGlass - spin.d) * 0.1 : spin.size;
+      spin.r = Math.max(1, !(spin.d > this.galaxyMagnifyingGlass) ? spin.size * (this.galaxyMagnifyingGlass - spin.d) * 0.1 : spin.size);
     });
   }
 
