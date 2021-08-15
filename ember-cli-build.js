@@ -3,12 +3,19 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function (defaults) {
+  debugger;
   let app = new EmberApp(defaults, {
     // Add options here
     sassOptions: {
       extension: 'scss'
     }
   });
+
+  app.import('vendor/animations/animation.js', { ember: ['default'] });
+  app.import('vendor/animations/circle.js', { ember: ['default'] });
+  app.import('vendor/animations/cylinder.js', { ember: ['default'] });
+  app.import('vendor/animations/gogh.js', { ember: ['default'] });
+  app.import('vendor/animations/square.js', { ember: ['default'] });
 
   // Use `app.import` to add additional libraries to the generated
   // output files.
