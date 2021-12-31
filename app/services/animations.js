@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class AnimationsService extends Service {
-  fps = 1/30;
+  fps = 1 / 30;
   lastAnimationTime = 0;
   ctx;
   canvas;
@@ -13,17 +13,14 @@ export default class AnimationsService extends Service {
     new AnimationCircle(),
     new AnimationSquare(),
     new AnimationCylinder(),
-    new AnimationGogh()
+    new AnimationGogh(),
   ];
   @tracked selectedAnimation;
-  
-  constructor(){
-    Math.distance = function(x1, y1, x2, y2) {
-      return Math.sqrt(
-        Math.pow(x1 - x2, 2) +
-        Math.pow(y1 - y2, 2)
-      );
-    }
+
+  constructor() {
+    Math.distance = function (x1, y1, x2, y2) {
+      return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    };
     super(...arguments);
   }
   get controls() {
@@ -40,8 +37,13 @@ export default class AnimationsService extends Service {
       hCenter,
       mouseX: this.mouseX,
       mouseY: this.mouseY,
-      mouseDistanceFromCenter: Math.distance(this.mouseX, this.mouseY, wCenter, hCenter)
-    }
+      mouseDistanceFromCenter: Math.distance(
+        this.mouseX,
+        this.mouseY,
+        wCenter,
+        hCenter
+      ),
+    };
   }
 
   @action
@@ -62,11 +64,11 @@ export default class AnimationsService extends Service {
     this.ctx.clearRect(0, 0, this.state.w, this.state.h);
     if (animation == this.selectedAnimation) {
       this.selectedAnimation = null;
-    }
-    else {
+    } else {
       this.selectedAnimation = animation;
       this.selectedAnimation.animationChangeEvent?.();
-      this.ctx.globalCompositeOperation = this.selectedAnimation.globalCompositeOperation ?? 'source-over';
+      this.ctx.globalCompositeOperation =
+        this.selectedAnimation.globalCompositeOperation ?? 'source-over';
       this.animLoop();
     }
   }
@@ -81,7 +83,7 @@ export default class AnimationsService extends Service {
         this.selectedAnimation.runLoop?.(this.ctx, this.state);
         this.lastAnimationTime = performance.now();
       }
-      requestAnimationFrame( this.animLoop );
+      requestAnimationFrame(this.animLoop);
     }
   }
 }
