@@ -5,6 +5,8 @@ import { inject as service } from '@ember/service';
 
 export default class ApplicationController extends Controller {
   @tracked loading = true;
+  @tracked showInfo = true;
+  @tracked showLinks = true;
   @tracked width = 0;
   @tracked height = 0;
   @service animations;
