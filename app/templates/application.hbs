@@ -1,6 +1,6 @@
 {{page-title 'DearthFunk'}}
 <div class='blender-animation {{if this.loading "loading"}}'></div>
-<div class='application {{if this.loading "loading"}}' {{did-resize this.didResize}}>
+<div class='application {{if this.loading "loading"}} {{if this.showGradient "showGradient"}}' {{did-resize this.didResize}}>
   <Canvas width={{this.width}} height={{this.height}} @onCanvasInserted={{this.animations.onCanvasInserted}} />
   <div class='left'>
     <Animations
@@ -23,6 +23,9 @@
       </button>
       <button type='button' {{on 'click' (fn (mut this.showInfo) (not this.showInfo))}}>
         hide info
+      </button>
+      <button type='button' {{on 'click' (fn (mut this.showGradient) (not this.showGradient))}}>
+        hide gradient
       </button>
     </div>
   {{/unless}}
