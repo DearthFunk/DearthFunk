@@ -1,9 +1,9 @@
 // https://github.com/DearthFunk/Animations/blob/master/animations/galaxy.service.js
 class AnimationGogh extends Animation {
   label = 'Æ';
-  galaxyStars = [...Array(150).keys()];;
+  galaxyStars = [...Array(500).keys()];;
   galaxyMagnifyingGlass = 150;
-  globalCompositeOperation = 'multiply';
+  //globalCompositeOperation = 'multiply';
 
   constructor() {
     super(...arguments);
@@ -23,7 +23,7 @@ class AnimationGogh extends Animation {
 
   updateLoop(state) {
     this.galaxyStars.forEach((spin, index) => {
-      let orbit = 1 + (250 * spin.orbit);
+      let orbit = 1 + (200 * spin.orbit) + (state.mouseDistanceFromCenter / 3);
       spin.angle += (spin.speed / 100);
       spin.x = state.wCenter + (Math.cos(index + spin.angle) * orbit);
       spin.y = state.hCenter + (Math.sin(index + spin.angle) * orbit);
@@ -33,7 +33,7 @@ class AnimationGogh extends Animation {
   }
 
   runLoop(ctx, state) {
-    this.fadeCanvas(ctx, state.w, state.h, 0.9);
+    this.fadeCanvas(ctx, state.w, state.h, 0.95);
     this.galaxyStars.forEach((spin) => {
       ctx.beginPath();
       ctx.fillStyle = spin.fillStyle;
