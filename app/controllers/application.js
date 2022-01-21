@@ -10,6 +10,7 @@ export default class ApplicationController extends Controller {
   @tracked showGradient = true;
   @tracked width = 0;
   @tracked height = 0;
+  isMobile;
   @service animations;
   @computed.alias('animations.selectedAnimation.controls') controls;
 
@@ -20,6 +21,7 @@ export default class ApplicationController extends Controller {
     super(...arguments);
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   }
 
   @action
