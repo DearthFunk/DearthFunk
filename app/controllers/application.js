@@ -24,24 +24,15 @@ export default class ApplicationController extends Controller {
     this.height = window.innerHeight;
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    let w = 1024;
-    let h = 768;
     this.photoGallery = [
-      {
-        src: '../background.png',
-        w,
-        h,
-      },
-      {
-        src: '../github.png',
-        w,
-        h,
-      },
-      {
-        src: '../splatter.png',
-        w,
-        h,
-      },
+      { src: '../photo-gallery/burnt.jpg', w: 3771, h: 2467 },
+      { src: '../photo-gallery/camping.jpg', w: 1852, h: 3827 },
+      { src: '../photo-gallery/oil=money_land.jpg', w: 3824, h: 2519 },
+      { src: '../photo-gallery/oil=money_sea.jpg', w: 3906, h: 2672 },
+      { src: '../photo-gallery/selfie.jpg', w: 2785, h: 3881 },
+      { src: '../photo-gallery/sun.jpg', w: 3730, h: 2513 },
+      { src: '../photo-gallery/bloodborne.jpg', w: 1968, h: 3851 },
+      { src: '../photo-gallery/black_hole_sun.jpg', w: 3699, h: 2498 },
     ];
   }
 
