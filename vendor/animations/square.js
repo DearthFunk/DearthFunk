@@ -4,6 +4,7 @@ class AnimationSquare extends Animation {
   label = 'µ';
   _squaresTotal = 40;
   squareLevelColors = [...Array(12).keys()];
+  globalCompositeOperation = 'lighten';
   squares = [];
   rotate = 0;
   point1 = {x:-1, y:-1};
@@ -45,7 +46,9 @@ class AnimationSquare extends Animation {
   }
 
   runLoop(ctx, state) {
-    ctx.clearRect(0, 0, state.w, state.h);
+    this.fadeCanvas(ctx, state.w, state.h, 0.8);
+
+//    ctx.clearRect(0, 0, state.w, state.h);
     this.rotate += 0.1;
 
     this.squareLevelColors.forEach((color, lvl) => {

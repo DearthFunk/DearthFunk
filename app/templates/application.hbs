@@ -1,38 +1,45 @@
-{{page-title 'DearthFunk'}}
-{{#unless this.isMobile}}
-  <div class='blender-animation {{if this.loading "loading"}}'></div>
-{{/unless}}
-<div class='application {{if this.loading "loading"}} {{if this.showGradient "showGradient"}}' {{did-resize this.didResize}}>
+<PhotoSwipe @items={{this.photoGallery}} @shareButtons={{false}} as |photoSwipe|>
+  {{page-title 'DearthFunk'}}
   {{#unless this.isMobile}}
-    <Canvas width={{this.width}} height={{this.height}} @onCanvasInserted={{this.animations.onCanvasInserted}} />
-    <div class='left'>
-      <Animations
-        @loading={{this.loading}}
-        @animations={{this.animations.animations}}
-        @selectAnimation={{this.animations.selectAnimation}}
-        @selectedAnimation={{this.animations.selectedAnimation}}
-      />
-    </div>
+    <div class='blender-animation {{if this.loading "loading"}}'></div>
   {{/unless}}
-  <div class='body'>
-    <Info @showLinks={{this.showLinks}} @showInfo={{this.showInfo}} @loading={{this.loading}} />
-  </div>
-  {{#unless this.isMobile}}
-    <div class='right'>
-      <AnimationControls @controls={{this.controls}} />
-    </div>
-    {{#unless this.loading}}
-      <div class='hide-controls'>
-        <button type='button' {{on 'click' (fn (mut this.showLinks) (not this.showLinks))}}>
-          hide links
-        </button>
-        <button type='button' {{on 'click' (fn (mut this.showInfo) (not this.showInfo))}}>
-          hide info
-        </button>
-        <button type='button' {{on 'click' (fn (mut this.showGradient) (not this.showGradient))}}>
-          hide gradient
-        </button>
+  <div class='application {{if this.loading "loading"}} {{if this.showGradient "showGradient"}}' {{did-resize this.didResize}}>
+    {{#unless this.isMobile}}
+      <Canvas width={{this.width}} height={{this.height}} @onCanvasInserted={{this.animations.onCanvasInserted}} />
+      <div class='left'>
+        <Animations
+          @loading={{this.loading}}
+          @animations={{this.animations.animations}}
+          @selectAnimation={{this.animations.selectAnimation}}
+          @selectedAnimation={{this.animations.selectedAnimation}}
+        />
       </div>
     {{/unless}}
-  {{/unless}}
-</div>
+    <div class='body'>
+      <Info
+        @showLinks={{this.showLinks}}
+        @showInfo={{this.showInfo}}
+        @loading={{this.loading}}
+        @togglePhotoGallery={{photoSwipe.actions.open}}
+      />
+    </div>
+    {{#unless this.isMobile}}
+      <div class='right'>
+        <AnimationControls @controls={{this.controls}} />
+      </div>
+      {{#unless this.loading}}
+        <div class='hide-controls'>
+          <button type='button' {{on 'click' (fn (mut this.showLinks) (not this.showLinks))}}>
+            hide links
+          </button>
+          <button type='button' {{on 'click' (fn (mut this.showInfo) (not this.showInfo))}}>
+            hide info
+          </button>
+          <button type='button' {{on 'click' (fn (mut this.showGradient) (not this.showGradient))}}>
+            hide gradient
+          </button>
+        </div>
+      {{/unless}}
+    {{/unless}}
+  </div>
+</PhotoSwipe>

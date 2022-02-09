@@ -8,6 +8,7 @@ export default class ApplicationController extends Controller {
   @tracked showInfo = true;
   @tracked showLinks = true;
   @tracked showGradient = true;
+  @tracked photoGallery;
   @tracked width = 0;
   @tracked height = 0;
   isMobile;
@@ -22,6 +23,26 @@ export default class ApplicationController extends Controller {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    let w = 1024;
+    let h = 768;
+    this.photoGallery = [
+      {
+        src: '../background.png',
+        w,
+        h,
+      },
+      {
+        src: '../github.png',
+        w,
+        h,
+      },
+      {
+        src: '../splatter.png',
+        w,
+        h,
+      },
+    ];
   }
 
   @action

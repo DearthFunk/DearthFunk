@@ -1,3 +1,5 @@
+@import 'ember-photoswipe';
+// ----------------- //
 @import 'animations.scss';
 @import 'info.scss';
 @import 'canvas.scss';
@@ -21,6 +23,11 @@ a {
   &.loading {
     opacity: 0;
   }
+}
+
+button.pswp__button--share {
+  //share button from ember-photoswipe
+  display: none !important;
 }
 
 body {

@@ -9,6 +9,9 @@
     <a href='https://soundcloud.com/user-777484854' disabled={{@loading}}>
       <img src='soundcloud.png' alt='SoundCloud' width='120' height='120' />
     </a>
+    <a href='' {{on 'click' this.togglePhotoGallery}} disabled={{@loading}}>
+      <img src='splatter.png' alt='Art Gallery' width='120' height='120' />
+    </a>
   </div>
 {{/if}}
 {{#if @showInfo}}
