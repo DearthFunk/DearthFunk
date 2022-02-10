@@ -1,4 +1,6 @@
-@import 'ember-photoswipe';
+$pswp__assets-path: 'images/';
+@import 'ember-photoswipe/main.scss';
+@import 'ember-photoswipe/default-skin/default-skin.scss';
 // ----------------- //
 @import 'animations.scss';
 @import 'info.scss';
