@@ -38,6 +38,7 @@ export default class ApplicationController extends Controller {
       { src: '../photo-gallery/automata.jpg', w: 4195, h: 2090 },
       { src: '../photo-gallery/dirty-sunnado.jpg', w: 4066, h: 2042 },
       { src: '../photo-gallery/derp-m0lt.jpg', w: 2878, h: 5418 },
+      { src: '../photo-gallery/dearth-funk.jpg', w: 4904, h: 3880 },
     ];
   }
 
