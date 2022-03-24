@@ -42,6 +42,7 @@ export default class ApplicationController extends Controller {
       { src: '../photo-gallery/com-it.jpg', w: 3844, h: 1868 },
       { src: '../photo-gallery/ice-fire.jpg', w: 2862, h: 5546 },
       { src: '../photo-gallery/white-square.jpg', w: 2768, h: 5505 },
+      { src: '../photo-gallery/ember.jpg', w: 5532, h: 3726 },
     ];
   }
 
