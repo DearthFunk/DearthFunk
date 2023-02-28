@@ -24,6 +24,7 @@ a {
   transition: opacity 2s ease-in;
   &.loading {
     opacity: 0;
+    pointer-events: none;
   }
 }
 
