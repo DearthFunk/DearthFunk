@@ -1,57 +1,106 @@
-# dearthfunk
+# DearthFunk Remake
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A modern React application built with TypeScript, Webpack, and React Router.
 
-## Prerequisites
+## Features
 
-You will need the following things properly installed on your computer.
+- **React 18** with TypeScript support
+- **Webpack 5** for bundling and development
+- **React Router** for client-side routing
+- **ESM modules** for modern JavaScript
+- **Hot Module Replacement** for fast development
+- **Responsive design** with mobile-first approach
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+## Project Structure
 
-## Installation
+```
+dearthfunk.remake/
+├── src/
+│   ├── components/
+│   │   └── Layout.tsx
+│   ├── pages/
+│   │   ├── Home.tsx
+│   │   ├── About.tsx
+│   │   ├── Contact.tsx
+│   │   └── NotFound.tsx
+│   ├── App.tsx
+│   ├── index.tsx
+│   ├── index.html
+│   └── styles.css
+├── webpack.config.js
+├── tsconfig.json
+├── tsconfig.check.json
+├── package.json
+└── README.md
+```
 
-* `git clone <repository-url>` this repository
-* `cd dearthfunk`
-* `npm install`
+## Getting Started
 
-## Running / Development
+### Prerequisites
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+- Node.js (v14 or higher)
+- npm or yarn
 
-### Code Generators
+### Installation
 
-Make use of the many generators for code, try `ember help generate` for more details
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd dearthfunk.remake
+   ```
 
-### Running Tests
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-* `ember test`
-* `ember test --server`
+### Development
 
-### Linting
+Start the development server:
+```bash
+npm start
+```
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+The application will open in your browser at `http://localhost:3000`.
 
 ### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+Build the application for production:
+```bash
+npm run build
+```
 
-### Deploying
+The built files will be in the `dist/` directory.
 
-Specify what it takes to deploy your app.
+### Type Checking
 
-## Further Reading / Useful Links
+Run TypeScript type checking:
+```bash
+npm run type-check
+```
 
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+### Development Mode
+
+Run webpack in development mode with file watching:
+```bash
+npm run dev
+```
+
+## Routes
+
+- `/` - Home page
+- `/about` - About page
+- `/contact` - Contact page with form
+- `*` - 404 Not Found page
+
+## Technologies Used
+
+- [React](https://reactjs.org/) - UI library
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Webpack](https://webpack.js.org/) - Module bundler
+- [React Router](https://reactrouter.com/) - Client-side routing
+- [Babel](https://babeljs.io/) - JavaScript compiler
+
+## License
+
+ISC
